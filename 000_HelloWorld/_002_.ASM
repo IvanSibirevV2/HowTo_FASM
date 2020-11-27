@@ -2,7 +2,6 @@
 use16               ;Генерировать 16-битный код
 org 100h            ;Программа начинается с адреса 100h
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
 jmp start
 hello db 'Hello, world!$'
 _char db 'H$'
@@ -14,6 +13,7 @@ include 'inc\Console_V0\m_WriteChar_N.inc'
 include 'inc\Console_V0\m_Write.inc'
 include 'inc\Console_V0\m_WriteLN.inc'
 include 'inc\Console_V0\m_ReadKey.inc'
+
 ;include 'inc\Console_V0\m_GetPtr.inc'
 ;include 'inc\Console_V0\m_GetChar.inc'
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

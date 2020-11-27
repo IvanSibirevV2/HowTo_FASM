@@ -7,40 +7,47 @@ hello db 'Hello, world!$'
 _char db '1234$'
 _The_Fin db '_The_Fin$'
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+include 'inc\Console_V0\m_WriteChar.inc'
+include 'inc\Console_V0\m_WriteChar_N.inc'
+include 'inc\Console_V0\m_Write.inc'
+include 'inc\Console_V0\m_WriteLN.inc'
+include 'inc\Console_V0\m_ReadKey.inc'
+include 'inc\Console_V0\m_SharpX79.inc'
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 start:
-    mov dx,hello
-    call m_Console_WriteLN
+	mov word [m_WriteLN.ptr],hello
+    call m_WriteLN
 	
 	;;;ѕример пересылки части текста или переменной целиком регистр
-	call m_Console_SharpX79
+	call m_SharpX79
 	
 		mov al,byte [_char]
-		mov dl,al
-		call m_Console_WriteChar
-		call m_Console_N
+		mov byte [m_WriteChar.DL],al
+		call m_WriteChar
+		call m_WriteChar_N
 	
 		mov ax,word [_char]
-		mov dl,al
-		call m_Console_WriteChar
-		mov dl,ah
-		call m_Console_WriteChar
-		call m_Console_N
+		mov byte [m_WriteChar.DL],al
+		call m_WriteChar
+		mov byte [m_WriteChar.DL],ah
+		call m_WriteChar
+		call m_WriteChar_N
 	
 		mov eax,dword  [_char]
-		mov dl,al
-		call m_Console_WriteChar
-		mov dl,ah
-		call m_Console_WriteChar
+		mov byte [m_WriteChar.DL],al
+		call m_WriteChar
+		mov byte [m_WriteChar.DL],ah
+		call m_WriteChar
 		shr eax, 16;циклический сдвиг в право на 8 BIT
-		mov dl,al
-		call m_Console_WriteChar
-		mov dl,ah
-		call m_Console_WriteChar
-		call m_Console_N
+		mov byte [m_WriteChar.DL],al
+		call m_WriteChar
+		mov byte [m_WriteChar.DL],ah
+		call m_WriteChar
+		call m_WriteChar_N
 		
 	;;;ѕример пересылки целиком регистра
 	;;;в часть текста или переменную целиком 
-	call m_Console_SharpX79
+	call m_SharpX79
 	
 		mov al,'!';eax=='___!'
 		mov ah,'!';eax=='__!!'
@@ -49,21 +56,22 @@ start:
 		mov ah,'!';eax=='!!!!'
 		
 		mov byte [_char],al
-		mov dx,_char
-		call m_Console_WriteLN
+		mov word [m_WriteLN.ptr],_char
+		call m_WriteLN
 		
 		mov word [_char],ax
-		mov dx,_char
-		call m_Console_WriteLN
+		mov word [m_WriteLN.ptr],_char
+		call m_WriteLN
 		
 		mov dword [_char],eax
-		mov dx,_char
-		call m_Console_WriteLN
+		mov word [m_WriteLN.ptr],_char
+		call m_WriteLN
 	
-	call m_Console_SharpX79
+	call m_SharpX79
 	
-	mov dx,_The_Fin
-    call m_Console_WriteLN
+	;mov dx,_The_Fin
+	mov word [m_WriteLN.ptr],_The_Fin
+    call m_WriteLN
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     ;/ќжидание нажати€ клавиши
     mov ah,01h
@@ -73,4 +81,4 @@ start:
     int 21h         ;/ «авершение программы
 ;-------------------------------------------------------
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-include 'Console.inc'
+;;include 'Console.inc'
