@@ -8,32 +8,21 @@ hello db 'Hello, world!$'
 _char db 'H$'
 _The_Fin db '_The_Fin$'
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;include 'inc\Console.inc'
-include 'inc\Console_V0\m_WriteChar.inc'
-include 'inc\Console_V0\m_WriteChar_N.inc'
-include 'inc\Console_V0\m_Write.inc'
-include 'inc\Console_V0\m_WriteLN.inc'
-include 'inc\Console_V0\m_ReadKey.inc'
-;include 'inc\Console_V0\m_GetPtr.inc'
-;include 'inc\Console_V0\m_GetChar.inc'
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 start:
-;mov dx,
-mov word [m_Write.ptr],hello
-call m_Write
-call m_WriteChar_N
-mov word [m_WriteLN.ptr],hello
-call m_WriteLN
-call m_WriteChar_N
-
-call m_ReadKey
-mov dl,byte [m_ReadKey.Key]
-mov byte [m_WriteChar.DL],dl
-call m_WriteChar
+	call m_inc
 	
-	call m_WriteChar_N
+    mov dx,hello
+    call m_Console_WriteLN
+	call m_Console_N
+	
+	call m_Console_ReadKey
+	mov dl,al
+	call m_Console_N
+	call m_Console_WriteChar
+	
+	call m_Console_N
 	mov dx,_The_Fin
-    call m_WriteLN
+    call m_Console_WriteLN
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     ;/Ожидание нажатия клавиши
     mov ah,01h
@@ -43,5 +32,5 @@ call m_WriteChar
     int 21h         ;/ Завершение программы
 ;-------------------------------------------------------
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
+include 'Console.inc'
 
