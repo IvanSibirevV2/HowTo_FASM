@@ -1,6 +1,7 @@
+;;include 'm_WriteChar_N';Повторно не вызывается
 m_WriteLN:
 jmp m_WriteLN.DataEnd
-	m_WriteLN.ptr db '0$'
+	m_WriteLN.ptr db '00$'
 m_WriteLN.DataEnd:
 ;;;hello db 'Hello, world!$'
 	push ax

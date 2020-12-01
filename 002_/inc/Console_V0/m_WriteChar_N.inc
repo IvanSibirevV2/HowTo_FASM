@@ -1,3 +1,4 @@
+;call m_WriteChar_N
 m_WriteChar_N:
 	push dx
 	push ax

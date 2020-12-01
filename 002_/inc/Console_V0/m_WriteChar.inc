@@ -1,3 +1,5 @@
+;mov byte [m_WriteChar.DL],'!'
+;call m_WriteChar
 m_WriteChar:
 jmp m_WriteChar.DataEnd
 	m_WriteChar.DL db '0$'

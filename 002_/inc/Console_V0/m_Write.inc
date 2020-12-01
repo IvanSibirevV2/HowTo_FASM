@@ -1,3 +1,5 @@
+;;mov word [m_Write.ptr],hello
+;;call m_Write
 m_Write:
 jmp m_Write.DataEnd
 	m_Write.ptr db '00$'

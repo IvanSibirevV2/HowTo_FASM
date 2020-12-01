@@ -1,6 +1,6 @@
 @echo off
 echo %cd%
-cd C:\D\Git_Hub\HowTo_FASM\000_HelloWorld
+cd C:\D\Git_Hub\HowTo_FASM\002_
 echo %cd%
 set FileName=_001_
 C:\D\Git_Hub\HowTo_FASM\Fasm\FASM.EXE %FileName%.ASM

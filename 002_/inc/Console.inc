@@ -1,11 +1,26 @@
-include '_m_Write.inc'
-include '_m_WriteChar.inc'
-include '_m_WriteChar_N.inc'
-include '_m_WriteLN.inc'
-include '_m_ReadKey.inc'
-include '_m_GetPtr.inc'
-include '_m_GetChar.inc'
+include 'Console_V0\m_WriteChar.inc'
+include 'Console_V0\m_WriteChar_N.inc'
+include 'Console_V0\m_Write.inc'
+include 'Console_V0\m_WriteLN.inc'
+include 'Console_V0\m_ReadKey.inc'
+;;include 'Console_V0\m_GetPtr.inc'
+;;include 'Console_V0\m_GetChar.inc'
 
+
+;m_Console_inc:
+;jmp jsvdjhcvjhsvcjhvsjchvjsvcjhsvclkj
+;_qwe db '!!!!!!!!$'
+;jsvdjhcvjhsvcjhvsjchvjsvcjhsvclkj:
+;		;dx - положите указатель на строку;Например вот так;mov dx,hello
+;		mov dx,_qwe
+;		mov ah,9
+;		int 21h
+;		;call m_Console_N
+;		mov dl,0ah
+;		mov ah,2
+;		int 21h
+		;
+;ret
 
 
 ;m_Console.Test
