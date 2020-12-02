@@ -16,16 +16,6 @@ proc m_SetEGA320x200 uses ax
 ret
 endp
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-proc m_SetPoint \
- uses ax CX DX \
- ,_x:word,_y:word,_color:byte
-	mov  CX, word [_x]
-	mov  DX, word [_y]
-	MOV  AH,0CH;ф-ия установки точки   
-	MOV  AL,byte [_color]
-	int  10h
-ret
-endp
 ;proc m_SetLine \
 ; uses ax CX DX \
 ; ,_x1:word,_y1:word
@@ -44,8 +34,12 @@ endp
 ;  mov bx,_x2
 ;  mov cx,_x1
 ;  sub bx,cx
-  
-;  div BL ;ax=ax/BL
+ ;y1=ax1+b;
+ ;y2=ax2+b;
+ ;y1-y2=a(x1-x2)+b-b;
+ ;y1-y2=a(x1-x2);
+ ;(y1-y2)/(x1-x2)=a;
+ ;div BL ;ax=ax/BL
   ;
 ;ret
 ;endp
