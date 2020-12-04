@@ -26,7 +26,7 @@ start:
 	ccall m_WriteLN,hello
 	
 	;ccall m_BitTest_Test
-	call m_BitTest_1_Test
+	call m_BitTest_2_Test
 	ccall m_WriteLN,hello
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     mov ah,01h;/Ожидание нажатия клавиши
@@ -35,3 +35,41 @@ start:
     mov ax,4C00h    ;\
     int 21h         ;/ Завершение программы
 ;-------------------------------------------------------
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+m_BitTest_2_Test:
+	mov byte[m_BitTest_2.TestS],000000011b
+	call m_BitTest_2
+	xor ax,ax
+	xor bx,bx
+	mov ax, word [m_BitTest_2.Resalt]
+	mov bl,ah
+	ccall m_WriteChar, bx
+	mov bl,al
+	ccall m_WriteChar, bx
+	ccall m_WriteChar_N
+	ccall m_WriteLN,hello
+ret
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+m_BitTest_2:
+jmp m_BitTest_2.DataSet
+	m_BitTest_2.TestS db '0$'
+	m_BitTest_2.Resalt db '00$'
+m_BitTest_2.DataSet:
+	
+	xor ax,ax
+	mov al, byte [m_BitTest_2.TestS]
+	;Тестируем младший разряд
+	mov byte[m_BitTest_1.TestS],al
+	call m_BitTest_1
+	xor bx,bx
+	mov bl, byte [m_BitTest_1.Char]
+	
+	shl al,1 
+	;Тестируем старший разряд разряд
+	mov byte[m_BitTest_1.TestS],al
+	call m_BitTest_1
+	xor bx,bx
+	mov bh, byte [m_BitTest_1.Char]
+	
+	mov word [m_BitTest_2.Resalt],bx
+ret
