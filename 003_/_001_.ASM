@@ -22,10 +22,17 @@ use32
 start:
  
   cinvoke setlocale,0,ru
-  cinvoke printf,hello
+  
+	xor ecx,ecx
+	mov ecx,0
+  
+	if 0=eax
+		cinvoke printf,hello
+	end if
+  
+  
 
   ;call m_BitWritEAX
-  
 	;mov eax,10000000000000000000000000000000b
 	;xor ecx,ecx
 	;mov ecx,2

@@ -46,8 +46,8 @@ start:
 		;jnb m_l1; = 1
 		;jna m_l1; = 1
 		;jle m_l1; = 1
-		;l m_l1; = 1
-		;ge m_l1; = 1
+		;jl m_l1; = 1
+		;jge m_l1; = 1
 		;jnz m_l1; = 1
 		;;; ;;; ;;; ;;;
 		;cmp(10,10,jbe)= 1
