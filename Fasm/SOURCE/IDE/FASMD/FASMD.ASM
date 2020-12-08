@@ -1,6 +1,6 @@
 
 ; flat assembler IDE for DOS/DPMI
-; Copyright (c) 1999-2019, Tomasz Grysztar.
+; Copyright (c) 1999-2020, Tomasz Grysztar.
 ; All rights reserved.
 
 	format	MZ
@@ -1821,7 +1821,8 @@ segment main use32
 	ret
 
   load_file:
-	push	edx [editor_memory]
+	push	edx
+	push	[editor_memory]
 	call	get_full_pathname
 	push	esi
 	call	flush_editor_data
@@ -5947,8 +5948,11 @@ segment main use32
 ; File operations
 
   dos_int:
-	push	0 0 0
-	pushw	buffer_segment buffer_segment
+	push	0
+	push	0
+	push	0
+	pushw	buffer_segment
+	pushw	buffer_segment
 	stc
 	pushfw
 	push	eax
@@ -5974,9 +5978,9 @@ segment main use32
 	mov	edx,[esp+14h]
 	mov	ecx,[esp+18h]
 	mov	ah,[esp+20h]
-	add	esp,32h
 	sahf
-	mov	eax,[esp-32h+1Ch]
+	mov	eax,[esp+1Ch]
+	lea	esp,[esp+32h]
 	ret
   open:
 	push	esi edi
@@ -6477,7 +6481,7 @@ segment main use32
 ; String constants
 
   _caption db 'flat assembler ',VERSION_STRING,0
-  _copyright db 'Copyright (c) 1999-2019, Tomasz Grysztar',0
+  _copyright db 'Copyright (c) 1999-2020, Tomasz Grysztar',0
 
   _null db 0
   _untitled db 'Untitled',0

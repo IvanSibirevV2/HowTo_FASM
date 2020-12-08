@@ -2,6 +2,32 @@
 Visit http://flatassembler.net/ for more information.
 
 
+version 1.73.25 (Aug 20, 2020)
+
+[-] Corrected operand size handling for "vldmxcsr"/"vstmxcsr" instructions.
+
+
+version 1.73.24 (Apr 29, 2020)
+
+[+] Added "invlpgb" and "tlbsync" instructions.
+
+[-] Upper bits of default entry point of ELF64 executable were not correctly
+    stored in the header.
+
+
+version 1.73.23 (Apr 09, 2020)
+
+[+] Added "psmash", "pvalidate", "rmpadjust" and "rmpupdate" instructions.
+
+[-] No longer allowing "mov" to/from CR9-CR15 outside of long mode.
+
+
+version 1.73.22 (Feb 09, 2020)
+
+[-] Removed a trick from preprocessor's implementation that caused
+    the x64 version to crash when replacing symbolic constant in a label.
+
+
 version 1.73.21 (Dec 05, 2019)
 
 [+] Added "$%" and "$%%" symbols, and output offset addressing with "load"

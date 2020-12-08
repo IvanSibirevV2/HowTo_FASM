@@ -693,6 +693,8 @@ wm_mousewheel:
 	mov	[last_operation],0
 	jmp	text_changed
 wm_mousehwheel:
+	lea	eax,[sc]
+	invoke	GetScrollInfo,[hwnd],SB_HORZ,eax
 	mov	esi,[window_line]
 	cmp	[wparam],0
 	jl	hscroll_left

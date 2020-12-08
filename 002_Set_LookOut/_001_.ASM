@@ -22,41 +22,28 @@ include 'inc\Console_V1\m_SharpX.inc'
 ;include 'inc\Set_LookOut\m_SharpX.inc'
 ;include 'inc\BitS\m_BitWrite.inc'
 include 'inc\BitS\m_BitWritEAX.inc'
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 start:
 	ccall m_WriteLN,hello
-
-	call m_BitWritEAX
-	mov dl,'!'
-mov ah,2
-int 21h
+	
+    call m_BitWritEAX
+    ccall m_WriteChar,'!'
+	;call m_BitReg
 	ccall m_WriteLN,hello
-	
-	;ccall m_BitTest_Test
-	;call m_BitTest_2_Test
-	;ccall m_WriteLN,hello
-	;ccall m_BitWritEAX_Test
-	;mov eax,01110b
-	;mov ebx,01010b
-	;call m_GeneralRegisters
-	
-	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-	;call m_WriteTextEax
-	;call m_BitWritEAX
-	
-	;mov dl,'!'
-	;mov ah,2
-	;int 21h
-	
-	;call m_WriteTextEax
-	;call m_BitWritEAX
-	
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-    mov ah,01h;/Ожидание нажатия клавиши
+    mov ah,01h;Ожидание нажатия клавиши
     int 21h
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-    mov ax,4C00h    ;\
-    int 21h         ;/ Завершение программы
+    mov ax,4C00h    ;
+    int 21h         ;Завершение программы
 ;-------------------------------------------------------
+m_BitReg:
+ ccall m_WriteChar,'e'
+ ccall m_WriteChar,'a'
+ ccall m_WriteChar,'x'
+ call m_BitWritEAX
+ ccall m_WriteChar,'!'
+ret
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
