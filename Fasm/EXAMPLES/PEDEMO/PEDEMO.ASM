@@ -1,7 +1,7 @@
 
 ; Example of making 32-bit PE program as raw code and data
 
-format PE GUI
+format PE32 GUI
 entry start
 
 section '.text' code readable executable

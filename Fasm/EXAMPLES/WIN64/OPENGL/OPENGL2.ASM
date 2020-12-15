@@ -5,7 +5,7 @@ format PE64 GUI 5.0
 entry start
 
 include 'win64a.inc'
-
+                               прмаормлгр
 include 'opengl.inc'
 ;include '..\..\opengl\opengl.inc'
 

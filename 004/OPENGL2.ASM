@@ -3,17 +3,15 @@
 
 format PE64 GUI 5.0
 entry start
-
-include 'win64a.inc'
-
+;—ƒ≈—‹ œ»ÿ≈Ã —¬Œ» œ”“»
+include 'C:\D\Git_Hub\HowTo_FASM\Fasm\INCLUDE\win64a.inc'
+;—ƒ≈—‹ œ»ÿ≈Ã —¬Œ» œ”“»
 include 'opengl.inc'
-;include '..\..\opengl\opengl.inc'
 
 section '.text' code readable executable
-
   start:
+	;//ÒŒ«ƒ¿Õ»≈ Œ Õ¿ » ≈√Œ –≈√»—“–¿÷»ﬂ
         sub     rsp,8           ; Make stack dqword aligned
-
         invoke  GetModuleHandle,0
         mov     [wc.hInstance],rax
         invoke  LoadIcon,0,IDI_APPLICATION
@@ -22,7 +20,7 @@ section '.text' code readable executable
         mov     [wc.hCursor],rax
         invoke  RegisterClass,wc
         invoke  CreateWindowEx,0,_class,_title,WS_VISIBLE+WS_OVERLAPPEDWINDOW+WS_CLIPCHILDREN+WS_CLIPSIBLINGS,16,16,432,432,NULL,NULL,[wc.hInstance],NULL
-
+	;Ó¡–¿¡Œ“◊»  —ŒŒ¡Ÿ≈Õ» Œ Õ¿
   msg_loop:
         invoke  GetMessage,addr msg,NULL,0,0
         cmp     eax,1
@@ -34,7 +32,7 @@ section '.text' code readable executable
 
   end_loop:
         invoke  ExitProcess,[msg.wParam]
-
+;Ô–Œ÷≈ƒ”–¿,  Œ“Œ–¿ﬂ «¿œ”— ¿≈“—ﬂ ¡≈— ŒÕ≈◊ÕŒ≈  ŒÀ- ¬Œ –¿«
 proc WindowProc uses rbx rsi rdi, hwnd,wmsg,wparam,lparam
         mov     [hwnd],rcx
         frame
@@ -83,27 +81,70 @@ proc WindowProc uses rbx rsi rdi, hwnd,wmsg,wparam,lparam
         invoke  glViewport,0,0,[rc.right],[rc.bottom]
         xor     eax,eax
         jmp     .finish
-  .wmpaint:
+  .wmpaint:;»—”≈Ã —ƒ≈—‹
         invoke  GetTickCount
         sub     eax,[clock]
         cmp     eax,10
         jb      .animation_ok
         add     [clock],eax
-        invoke  glRotatef,float [theta],float dword 0.0,float dword 0.0,float dword 1.0
+		;;¬‡˘ÂÌËÂ ¬‡¯Â„Ó ·ËÚ Ï‡Ô‡
+        ;invoke  glRotatef,float [theta],float dword 0.0,float dword 0.0,float dword 1.0
       .animation_ok:
+		macro  _macro_Rectangel x1,x2,y1,y2,colorR,colorG,colorB
+		{
+			invoke  glBegin,GL_QUADS
+				invoke  glColor3f,colorR,colorG,colorB
+				invoke  glVertex3d,x1,y2,float 0.0
+				invoke  glVertex3d,x2,y2,float 0.0
+				invoke  glVertex3d,x2,y1,float 0.0
+				invoke  glVertex3d,x1,y1,float 0.0
+				invoke  glVertex3d,x1,y2,float 0.0
+			invoke  glEnd
+		}
+		macro  _macro_Triangle x1,x2,x3,y1,y2,y3,colorR,colorG,colorB
+		{
+			invoke  glBegin,GL_QUADS
+				invoke  glColor3f,colorR,colorG,colorB
+				invoke  glVertex3d,x1,y1,float 0.0
+				invoke  glVertex3d,x2,y3,float 0.0
+				invoke  glVertex3d,x3,y3,float 0.0
+				invoke  glVertex3d,x1,y1,float 0.0
+			invoke  glEnd
+		}
+		;_macro_Triangle float -0.5, float -0.2, float -0.8,float 0.5 ,float 0.2,float -0.2,float dword 0.1,float dword 0.1,float dword 1.0
+		;_macro_Rectangel  float -0.5, float -0.2,float 0.5 ,float 0.2,float dword 0.1,float dword 1.0,float dword 0.1
         invoke  glClear,GL_COLOR_BUFFER_BIT
-        invoke  glBegin,GL_QUADS
-        invoke  glColor3f,float dword 1.0,float dword 0.1,float dword 0.1
-        invoke  glVertex3d,float -0.6,float -0.6,float 0.0
-        invoke  glColor3f,float dword 0.1,float dword 0.1,float dword 0.1
-        invoke  glVertex3d,float 0.6,float -0.6,float 0.0
-        invoke  glColor3f,float dword 0.1,float dword 0.1,float dword 1.0
-        invoke  glVertex3d,float 0.6,float 0.6,float 0.0
-        invoke  glColor3f,float dword 1.0,float dword 0.1,float dword 1.0
-        invoke  glVertex3d,float -0.6,float 0.6,float 0.0
+		_macro_Rectangel  float -0.5, float -0.2,float 0.5 ,float 0.2,float dword 0.1,float dword 1.0,float dword 0.1
+		_macro_Triangle float -0.5, float -0.2, float -0.8,float 0.5 ,float 0.2,float -0.2,float dword 0.1,float dword 0.1,float dword 1.0
+		;·ÀŒ  ƒÀﬂ –»—Œ¬¿Õ»ﬂ ¬¿ÿ≈… ‘»√”–€
+		;»—”≈Ã √ŒÀŒ¬”
+        ;invoke  glBegin,GL_QUADS
+		;	invoke  glColor3f,float dword 1.0,float dword 0.1,float dword 0.1
+        ;(-0.5;0.5);(-0.2;0.5)
+		;(-0.5;0.2);(-0.2;0.2)
+		;	invoke  glVertex3d,float -0.5,float 0.5,float 0.0
+		;	invoke  glVertex3d,float -0.2,float 0.5,float 0.0
+		;	invoke  glVertex3d,float -0.2,float 0.2,float 0.0
+		;	invoke  glVertex3d,float -0.5,float 0.2,float 0.0
+		;	invoke  glVertex3d,float -0.5,float 0.5,float 0.0
+		;(-0.4;0.2);(-0.3;0.1)
+		;(-0.4;0.2);(-0.3;0.1)
+        ;invoke  glEnd
+		;»—”≈Ã ¯≈ﬁ
+		invoke  glBegin,GL_QUADS
+			invoke  glColor3f,float dword 1.0,float dword 0.1,float dword 0.1
+        ;(-0.4;0.2);(-0.3;0.1)
+		;(-0.4;0.2);(-0.3;0.1)
+			invoke  glVertex3d,float -0.4,float 0.2,float 0.0
+			invoke  glVertex3d,float -0.3,float 0.2,float 0.0
+			invoke  glVertex3d,float -0.3,float 0.1,float 0.0
+			invoke  glVertex3d,float -0.4,float 0.1,float 0.0
+			invoke  glVertex3d,float -0.4,float 0.2,float 0.0
+		
         invoke  glEnd
         invoke  SwapBuffers,[hdc]
         xor     eax,eax
+		
         jmp     .finish
   .wmkeydown:
         cmp     r8d,VK_ESCAPE

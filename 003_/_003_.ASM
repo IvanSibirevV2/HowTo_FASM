@@ -17,21 +17,26 @@ section '.idata' import data readable
                system,'system'
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 section '.data' data readable writeable
-        cmd db 'pause',0
-        m1 db 'Input a b: ',13,10,0
-        ru db 'Russian',0
-        hello db 'Привет',0
-        fmat db '%d %d',0
+        _hello db 'Привет',0
+		_hello2 db 'Как дела?',0
+		_Pause db 'Pause',0
+		;_Echo db 'Echo.',0
+		_N db 13,10,0
+		_Russian db 'Russian',0
+		fmat db '%d',0
         a dd 0
-        b dd 0
 section '.code' code readable executable
+
 start:
-        cinvoke setlocale,0,ru
-        cinvoke printf,m1
-        cinvoke scanf,fmat, a,b
-        jmp exit ;???????
+        cinvoke setlocale,0,_Russian
+        ;Вывод на экран текста
+		cinvoke printf,_hello
+		;Переход на новую строку
+		cinvoke printf,_N
+		cinvoke printf,_hello2
+		cinvoke printf,_N
+		cinvoke scanf,fmat, a
+		
+		cinvoke system,_Pause
 exit:
-		;invoke ExitProcess, 0
-		push 0
-		call [ExitProcess]
-        
+        invoke ExitProcess, 0
