@@ -1,6 +1,4 @@
-
 ; OpenGL programming example
-
 format PE64 GUI 5.0
 entry start
 ;—ƒ≈—‹ œ»ÿ≈Ã —¬Œ» œ”“»
@@ -89,6 +87,10 @@ proc WindowProc uses rbx rsi rdi, hwnd,wmsg,wparam,lparam
         add     [clock],eax
 		;;¬‡˘ÂÌËÂ ¬‡¯Â„Ó ·ËÚ Ï‡Ô‡
         ;invoke  glRotatef,float [theta],float dword 0.0,float dword 0.0,float dword 1.0
+		;;invoke  glRotatef,float  [theta],float 0.0,float dword 0.0,float [theta]
+		;invoke  glRotatef,float dword 0.0,float [theta],float dword 0.0,float dword 1.0
+		;invoke  glRotatef,float dword 0.0,float dword 0.0,float float [theta],float dword 1.0
+		;invoke  glRotatef,float [theta],float dword 0.0,float dword 0.0,float dword 1.0
       .animation_ok:
 		macro  _macro_Rectangel x1,x2,y1,y2,colorR,colorG,colorB
 		{
@@ -114,8 +116,57 @@ proc WindowProc uses rbx rsi rdi, hwnd,wmsg,wparam,lparam
 		;_macro_Triangle float -0.5, float -0.2, float -0.8,float 0.5 ,float 0.2,float -0.2,float dword 0.1,float dword 0.1,float dword 1.0
 		;_macro_Rectangel  float -0.5, float -0.2,float 0.5 ,float 0.2,float dword 0.1,float dword 1.0,float dword 0.1
         invoke  glClear,GL_COLOR_BUFFER_BIT
-		_macro_Rectangel  float -0.5, float -0.2,float 0.5 ,float 0.2,float dword 0.1,float dword 1.0,float dword 0.1
-		_macro_Triangle float -0.5, float -0.2, float -0.8,float 0.5 ,float 0.2,float -0.2,float dword 0.1,float dword 0.1,float dword 1.0
+		;_macro_Rectangel  float -0.5, float -0.2,float 0.5 ,float 0.2,float dword 0.1,float dword 1.0,float dword 0.1
+		;_macro_Triangle float -0.5, float -0.2, float -0.8,float 0.5 ,float 0.2,float -0.2,float dword 0.1,float dword 0.1,float dword 1.0
+		
+		invoke  glBegin,GL_LINE_STRIP
+			invoke  glColor3f,float dword 1.0,float dword 0.1,float dword 0.1
+			invoke  glLineWidth,5
+			invoke  glVertex3d,float 0,float 0,float 0
+			invoke  glVertex3d,float 0.5,float 0,float 0
+			invoke  glVertex3d,float 0.5,float 0.5,float 0
+			invoke  glVertex3d,float 0,float 0.5,float 0
+			invoke  glVertex3d,float 0,float 0,float 0
+        invoke  glEnd
+		
+		invoke  glBegin,GL_LINE_STRIP
+			invoke  glColor3f,float dword 1.0,float dword 0.1,float dword 0.1
+			invoke  glLineWidth,5
+			invoke  glVertex3d,float -0.15,float -0.15,float 0
+			invoke  glVertex3d,float 0.35,float -0.15,float 0
+			invoke  glVertex3d,float 0.35,float 0.35,float 0
+			invoke  glVertex3d,float -0.15,float 0.35,float 0
+			invoke  glVertex3d,float -0.15,float -0.15,float 0
+        invoke  glEnd
+		
+		invoke  glBegin,GL_LINE_STRIP
+			invoke  glColor3f,float dword 1.0,float dword 0.1,float dword 0.1
+			invoke  glLineWidth,5
+			invoke  glVertex3d,float 0,float 0,float 0
+			invoke  glVertex3d,float -0.15,float -0.15,float 0
+        invoke  glEnd
+		
+		invoke  glBegin,GL_LINE_STRIP
+			invoke  glColor3f,float dword 1.0,float dword 0.1,float dword 0.1
+			invoke  glLineWidth,5
+			invoke  glVertex3d,float 0.5,float 0,float 0
+			invoke  glVertex3d,float 0.35,float -0.15,float 0
+        invoke  glEnd
+		
+		invoke  glBegin,GL_LINE_STRIP
+			invoke  glColor3f,float dword 1.0,float dword 0.1,float dword 0.1
+			invoke  glLineWidth,5
+			invoke  glVertex3d,float 0.5,float 0.5,float 0
+			invoke  glVertex3d,float 0.35,float 0.35,float 0
+        invoke  glEnd
+		
+		invoke  glBegin,GL_LINE_STRIP
+			invoke  glColor3f,float dword 1.0,float dword 0.1,float dword 0.1
+			invoke  glLineWidth,5
+			invoke  glVertex3d,float 0,float 0.5,float 0
+			invoke  glVertex3d,float -0.15,float 0.35,float 0
+        invoke  glEnd
+		
 		;·ÀŒ  ƒÀﬂ –»—Œ¬¿Õ»ﬂ ¬¿ÿ≈… ‘»√”–€
 		;»—”≈Ã √ŒÀŒ¬”
         ;invoke  glBegin,GL_QUADS
@@ -131,17 +182,17 @@ proc WindowProc uses rbx rsi rdi, hwnd,wmsg,wparam,lparam
 		;(-0.4;0.2);(-0.3;0.1)
         ;invoke  glEnd
 		;»—”≈Ã ¯≈ﬁ
-		invoke  glBegin,GL_QUADS
-			invoke  glColor3f,float dword 1.0,float dword 0.1,float dword 0.1
+		;invoke  glBegin,GL_QUADS
+		;	invoke  glColor3f,float dword 1.0,float dword 0.1,float dword 0.1
         ;(-0.4;0.2);(-0.3;0.1)
 		;(-0.4;0.2);(-0.3;0.1)
-			invoke  glVertex3d,float -0.4,float 0.2,float 0.0
-			invoke  glVertex3d,float -0.3,float 0.2,float 0.0
-			invoke  glVertex3d,float -0.3,float 0.1,float 0.0
-			invoke  glVertex3d,float -0.4,float 0.1,float 0.0
-			invoke  glVertex3d,float -0.4,float 0.2,float 0.0
-		
-        invoke  glEnd
+		;	invoke  glVertex3d,float -0.4,float 0.2,float 0.0
+		;	invoke  glVertex3d,float -0.3,float 0.2,float 0.0
+		;	invoke  glVertex3d,float -0.3,float 0.1,float 0.0
+		;	invoke  glVertex3d,float -0.4,float 0.1,float 0.0
+		;	invoke  glVertex3d,float -0.4,float 0.2,float 0.0
+		;
+        ;invoke  glEnd
         invoke  SwapBuffers,[hdc]
         xor     eax,eax
 		

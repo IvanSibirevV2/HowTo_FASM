@@ -7,12 +7,12 @@ hello db 'Hello, world!$'
 _char db '1234$'
 _The_Fin db '_The_Fin$'
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-include 'inc\Console_V0\m_WriteChar.inc'
-include 'inc\Console_V0\m_WriteChar_N.inc'
-include 'inc\Console_V0\m_Write.inc'
-include 'inc\Console_V0\m_WriteLN.inc'
-include 'inc\Console_V0\m_ReadKey.inc'
-include 'inc\Console_V0\m_SharpX79.inc'
+include '..\incDos\Console_V0\m_WriteChar.inc'
+include '..\incDos\Console_V0\m_WriteChar_N.inc'
+include '..\incDos\Console_V0\m_Write.inc'
+include '..\incDos\Console_V0\m_WriteLN.inc'
+include '..\incDos\Console_V0\m_ReadKey.inc'
+include '..\incDos\Console_V0\m_SharpX79.inc'
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 start:
 	mov word [m_WriteLN.ptr],hello
