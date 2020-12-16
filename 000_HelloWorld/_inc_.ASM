@@ -17,10 +17,6 @@ include '..\incDos\Console_V0\m_ReadKey.inc'
 ;include 'inc\Console_V0\m_GetChar.inc'
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 include '..\macroDos\__Console_V0.inc'
-	
-
-
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 start:
 ;mov dx,

@@ -10,18 +10,18 @@ include '..\macroDos\__Console_V0.inc'
 start:
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 	
-	__TestOllCMP je
-	__TestOllCMP jbe
-	__TestOllCMP jb
-	__TestOllCMP jnz
-	__TestOllCMP jnl
-	__TestOllCMP jnc
-	__TestOllCMP jnb
-	__TestOllCMP jna
-	__TestOllCMP jle
-	__TestOllCMP jl
-	__TestOllCMP jge
-	__TestOllCMP jnz
+	__Test.CMP.Oll je
+	__Test.CMP.Oll jbe
+	__Test.CMP.Oll jb
+	__Test.CMP.Oll jnz
+	__Test.CMP.Oll jnl
+	__Test.CMP.Oll jnc
+	__Test.CMP.Oll jnb
+	__Test.CMP.Oll jna
+	__Test.CMP.Oll jle
+	__Test.CMP.Oll jl
+	__Test.CMP.Oll jge
+	__Test.CMP.Oll jnz
 	
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     ;Ожидание нажатия клавиши

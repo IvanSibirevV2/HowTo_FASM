@@ -1,3 +1,4 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 macro __WriteChar _Char
 {
 	push ax
@@ -23,32 +24,6 @@ macro __Write _str
 macro __WriteLN _str
 {
 	__Write _str
-	__WriteChar_N
-}
-macro __RValue.Write _str
-{
-;;;
-; l-value - требует предварительного создания переменной
-; - Все макросы и процедуры  по умолчанию являются l-value
-; r-value - не требует предварительного создания переменной
-;;Терминология взята с сайта
-;;https://ravesli.com/urok-190-ssylki-r-value/#toc-2
-;;;
-local m_data,__str
-jmp m_data
-	__str db _str
-m_data:
-	push ax
-	push dx
-		mov dx, __str;dx - положите указатель на строку;Например вот так;mov dx,hello
-		mov ah,9
-		int 21h
-	pop dx
-	pop ax
-}
-macro __RValue.WriteLN _str
-{
-	__RValue.Write _str
 	__WriteChar_N
 }
 macro __ReadKeyToAL
@@ -90,11 +65,38 @@ __RValue.Write 'CMP('#`_A#','#`_B#')&'#`_JmpS#'$'
 __WriteChar '}'
 ;__WriteChar_N
 }
-macro __TestOllCMP _JmpS
+macro __Test.CMP.Oll _JmpS
 {
-	__TestCMP 10,10,_JmpS
-	__TestCMP 10,11,_JmpS
-	__TestCMP 11,10,_JmpS
+	__TestCMP 12,11,_JmpS
+	__TestCMP 11,11,_JmpS
+	__TestCMP 11,12,_JmpS
+	__WriteChar_N
+}
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+macro __RValue.Write _str
+{
+;;;
+; l-value - требует предварительного создания переменной
+; - Все макросы и процедуры  по умолчанию являются l-value
+; r-value - не требует предварительного создания переменной
+;;Терминология взята с сайта
+;;https://ravesli.com/urok-190-ssylki-r-value/#toc-2
+;;;
+local m_data,__str
+jmp m_data
+	__str db _str
+m_data:
+	push ax
+	push dx
+		mov dx, __str;dx - положите указатель на строку;Например вот так;mov dx,hello
+		mov ah,9
+		int 21h
+	pop dx
+	pop ax
+}
+macro __RValue.WriteLN _str
+{
+	__RValue.Write _str
 	__WriteChar_N
 }
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
