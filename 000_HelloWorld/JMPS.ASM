@@ -5,17 +5,24 @@ jmp start
 _ok db '!!!!!!$'
 _The_Fin db '_The_Fin$'
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+include '..\macroDos\__Console_V0.inc'
+
 start:
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-    mov eax,11
-	mov ebx,10
-    cmp eax,ebx
-	call m_jnb
-	;cmp(eax,ebx,jnz)
-	;cmp(10,10,jnb)= Переход есть
-	;cmp(10,11,jnb)= Перехода нет
-	;cmp(11,10,jnb)= Переходесть
-	;Сами проверяйте
+	
+	__TestOllCMP je
+	__TestOllCMP jbe
+	__TestOllCMP jb
+	__TestOllCMP jnz
+	__TestOllCMP jnl
+	__TestOllCMP jnc
+	__TestOllCMP jnb
+	__TestOllCMP jna
+	__TestOllCMP jle
+	__TestOllCMP jl
+	__TestOllCMP jge
+	__TestOllCMP jnz
+	
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     ;Ожидание нажатия клавиши
     mov ah,01h
@@ -24,34 +31,6 @@ start:
     mov ax,4C00h
     int 21h
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-m_jnb:
-call m_begin	
-	jnb m_l1
-	jmp m_20201118_2050
-    m_l1:
-      mov dx,_ok
-      mov ah,9
-      int 21h
-      mov dl,0ah
-      mov ah,2
-      int 21h
-	m_20201118_2050:
-call m_end
-ret
 
-m_begin:
-	mov dl,123
-	mov ah,2
-	int 21h
-	mov dl,0ah
-	mov ah,2
-	int 21h
-ret
-m_end:
-	mov dl,125
-	mov ah,2
-	int 21h
-	mov dl,0ah
-	mov ah,2
-	int 21h
-ret
+
+
