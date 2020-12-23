@@ -67,4 +67,21 @@ pop ecx
 pop ebx
 pop eax
 }
+macro __Rectangle _x1,_x2,_y1,_y2,_color
+{
+local m_Data, _local_y, m_1
+jmp m_Data
+	_local_y db '0$'
+m_Data:
+	mov ax,_y1
+	mov bx,_y2
+	mov word[_local_y],ax
+	__LineXXY _x1,_x2,word[_local_y],_color	
+	m_1:
+		inc ax
+		mov word[_local_y],ax
+		__LineXXY _x1,_x2,word[_local_y],_color
+	cmp ax,_y2
+	jne m_1
+}
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
