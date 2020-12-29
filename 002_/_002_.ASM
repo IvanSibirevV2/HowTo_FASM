@@ -13,20 +13,23 @@ section '.data' data readable writeable
 __InitConsoleSectionData
 	a dd 0
 	b dd 0
-	;_hel>low db 'Привейт',0
 	
-macro If a,compValue,b
+macro __qwe [_str]
 {
-local m_Data
-jmp m_Data
-
-m_Data:
+__RValue.WriteLN '???'
+COMMON
+__RValue.WriteLN '!!!'
+FORWARD
+__RValue.WriteLN _str
+REVERSE
+__RValue.WriteLN _str
 }
+	
 	
 section '.code' code readable executable
 start:
         __setlocale_Russian
-		;__qwe 'Хочу пять','По машинно ориентированному программированию','ПЖЛСТ'
+		__qwe 'Хочу пять','По машинно ориентированному программированию','ПЖЛСТ'
 		__SharpX 20
 		
 		;__WriteLN _hellow
