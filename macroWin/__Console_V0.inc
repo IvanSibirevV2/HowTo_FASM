@@ -18,7 +18,6 @@ macro __InitConsoleSectionData
 		_Russian db 'Russian',0
         _Pause db 'pause',0
 		_N db 13,10,0
-        
 }
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 macro __setlocale_Russian
@@ -49,13 +48,19 @@ __Write _N
 }
 macro __RValue.Read fmat,[param]
 {
+COMMON
+;COMMON - Деректива, после которой программной
+;код повторяется для всей групповой переменной
+;[param]
+;FORWARD/REVERSE (В Прямом/В Обратном порядке)- Деректива, после которой программной
+;код повторяется для каждого элемента
+;групповой переменной [param] 
 local m_data,_fmat
 jmp m_data
 	_fmat db fmat,0
 m_data:
-	cinvoke scanf,_fmat,[param]
+	cinvoke scanf,_fmat,param
 }
-
 macro __SharpX _count
 {
 	local m_1

@@ -14,16 +14,27 @@ __InitConsoleSectionData
         a dd 0
         b dd 0
 section '.code' code readable executable
+macro __qwe [str]
+{
+COMMON
+__RValue.WriteLN '!!!!!!!!!!!!!'
+REVERSE
+__RValue.WriteLN str
+}
 start:
         __setlocale_Russian
+		__qwe 'Хочу пять','По машинно ориентированному программированию','ПЖЛСТ'
+		
 		__SharpX 20
 		__RValue.WriteLN 'Привет мир!!!'
+		
+		
 		
 		__RValue.WriteLN 'Input a b: '
 		__WriteLN _N
 		__Write _N
-		__RValue.Read '%d %d', a,b
-        ;cinvoke scanf,fmat, a,b
+		__RValue.Read '%d %d',a,b
+        ;cinvoke scanf,fmat,a,b
 		cinvoke system,_Pause
         jmp exit ;???????
 exit:
