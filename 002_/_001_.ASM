@@ -17,17 +17,19 @@ section '.idata' import data readable
                system,'system'
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 section '.data' data readable writeable
-        cmd db 'pause',0
+        _Pause db 'pause',0
+		_N db 13,10,0
         m1 db 'Input a b: ',13,10,0
-        ru db 'Russian',0
+        _Russian db 'Russian',0
         hello db 'Привет',0
         fmat db '%d %d',0
         a dd 0
         b dd 0
 section '.code' code readable executable
 start:
-        cinvoke setlocale,0,ru
+        cinvoke setlocale,0,_Russian
         cinvoke printf,m1
+		cinvoke printf,_N
         cinvoke scanf,fmat, a,b
 		cinvoke system,_Pause
         jmp exit ;???????
