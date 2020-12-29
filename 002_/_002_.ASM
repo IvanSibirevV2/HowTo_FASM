@@ -11,24 +11,27 @@ __InitConsoleSectionImport
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 section '.data' data readable writeable
 __InitConsoleSectionData
-        a dd 0
-        b dd 0
-section '.code' code readable executable
-macro __qwe [str]
+	a dd 0
+	b dd 0
+	;_hel>low db 'Привейт',0
+	
+macro If a,compValue,b
 {
-COMMON
-__RValue.WriteLN '!!!!!!!!!!!!!'
-REVERSE
-__RValue.WriteLN str
+local m_Data
+jmp m_Data
+
+m_Data:
 }
+	
+section '.code' code readable executable
 start:
         __setlocale_Russian
-		__qwe 'Хочу пять','По машинно ориентированному программированию','ПЖЛСТ'
-		
+		;__qwe 'Хочу пять','По машинно ориентированному программированию','ПЖЛСТ'
 		__SharpX 20
+		
+		;__WriteLN _hellow
+		
 		__RValue.WriteLN 'Привет мир!!!'
-		
-		
 		
 		__RValue.WriteLN 'Input a b: '
 		__WriteLN _N

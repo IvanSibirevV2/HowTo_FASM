@@ -11,7 +11,6 @@ macro .if [arg]
   __ELSE equ ..else
   JNCOND __ELSE,arg
 }
-
 macro .else
 {
   jmp __ENDIF
@@ -19,7 +18,6 @@ macro .else
   restore __IF
   __IF equ ,
 }
-
 macro .elseif [arg]
 {
   common
