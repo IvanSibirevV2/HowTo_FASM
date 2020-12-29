@@ -29,6 +29,7 @@ start:
         cinvoke setlocale,0,ru
         cinvoke printf,m1
         cinvoke scanf,fmat, a,b
+		cinvoke system,_Pause
         jmp exit ;???????
 exit:
 		;invoke ExitProcess, 0
