@@ -276,6 +276,17 @@ macro __Test.__BiTest_RAX{
 	__BiTest_RAX
 }
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+macro __BiTest_Flag
+{
+;https://en.wikipedia.org/wiki/FLAGS_register
+;https://prog-cpp.ru/asm-command/
+push rax
+pushf
+pop ax
+__BiTest_AX
+pop rax
+}
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 macro __BiTest_Oll{
 push rax
 push rbx
@@ -331,6 +342,22 @@ pushf
 	__BiTest_RAX
 	__RValue.WriteLN 'B'
 popf
+pop rdx
+pop rcx
+pop rbx
+pop rax
+;...
+push rax
+push rbx
+push rcx
+push rdx
+pushf
+	__RValue.WriteLN 'Flag=**N*ODITSZ*A*P*C'
+	__RValue.Write 'Flag='
+popf
+pushf
+	__BiTest_Flag
+	__RValue.WriteLN 'B'
 pop rdx
 pop rcx
 pop rbx

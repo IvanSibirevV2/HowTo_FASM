@@ -27,12 +27,20 @@ start:
 		__Test.__BiTest_RAX
 		__Write _N
 		
+		__SharpX 20
+		;https://prog-cpp.ru/asm-command/
+;Ставит в ноль
+CLC	
+CLD
+;Ставит в единицу
+STC
+STD
+;CLI;STI; - оНИ ЕСТЬ НО ВЫРУБАЮТ ИСПОЛНЕНИЕ ПРОГРАММНОГО КОДА НАЧЕСТО
 		MOV RAX, 100001B
 		MOV RBX, 100011B
 		MOV RCX, 100111B
 		MOV RDX, 101111B
 		__BiTest_Oll
-		
 		cinvoke system,_Pause
         jmp exit ;???????
 exit:
