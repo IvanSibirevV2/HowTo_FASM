@@ -18,13 +18,11 @@ section '.code' code readable executable
 start:
         __setlocale_Russian
 		__SharpX 20
-		;__Test__BiTest_MonoScript
-		
-		__BiTest_MonoScript 64, RAX
-		__BiTest_MonoScript 64, RBX	
-		__BiTest_MonoScript 64, RCX
-		__BiTest_MonoScript 64, RDX
-		
+		__Test.BiTest_MonoScript
+		__SharpX 20
+		__BiTest_Oll
+		__SharpX 20
+		__BiTest_Oll		
 		__SharpX 20
 		; Это неполный пример, в котором продемонстрировано 
 		; вывод на экран регистра флагов и регистров общего назначения

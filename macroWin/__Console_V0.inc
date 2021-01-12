@@ -33,12 +33,10 @@ macro __InitConsoleSectionData
 		_9 db '9',0
 }
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-macro __setlocale_Russian
-{
-	cinvoke setlocale,0,_Russian
-}
-macro __Write _Char
-{
+;; Консольный минимум				          ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+macro __setlocale_Russian{cinvoke setlocale,0,_Russian}
+macro __Write _Char{
 push rax
 push rbx
 push rcx
@@ -51,26 +49,22 @@ pop rcx
 pop rbx
 pop rax
 }
-macro __WriteLN _Char
-{
+macro __WriteLN _Char{
 __Write _Char
 __Write _N
 }
-macro __RValue.Write Char
-{
+macro __RValue.Write Char{
 local m_data,_Char
 jmp m_data
 	_Char db Char,0
 m_data:
 	__Write _Char
 }
-macro __RValue.WriteLN Char
-{
+macro __RValue.WriteLN Char{
 __RValue.Write Char
 __Write _N
 }
-macro __RValue.Read fmat,[param]
-{
+macro __RValue.Read fmat,[param]{
 COMMON
 ;COMMON - Деректива, после которой программной
 ;код повторяется для всей групповой переменной
@@ -84,8 +78,7 @@ jmp m_data
 m_data:
 	cinvoke scanf,_fmat,param
 }
-macro __SharpX _count
-{
+macro __SharpX _count{
 	local m_1
 	push rcx
 	xor ecx,ecx
@@ -140,9 +133,9 @@ macro __Test.CMP.Oll _JmpS
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Битовые тесты с выводом на экран           ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-macro __BiTest_MonoScript _Count, _Param{
+macro __BiTest_MonoScript _TXT,_Count, _Param{
 	local m_y89ryd3,m_4234423,m_4723649
-	__RValue.Write `_Param#'='
+	__RValue.Write _TXT
 	push rax
 	push rbx
 	push rcx
@@ -178,111 +171,62 @@ macro __BiTest_MonoScript _Count, _Param{
 	pop rax
 	__RValue.WriteLN 'B'
 }
-macro __Test__BiTest_MonoScript
-{
+macro __Test.BiTest_MonoScript{
 	xor rax,rax
 	mov al,10000000b
-	__BiTest_MonoScript 8, AL
+	__BiTest_MonoScript "AL=",8, AL
 	;;;
 	xor rax,rax
 	mov ax,1000000000000000b
-	__BiTest_MonoScript 16, AX
+	__BiTest_MonoScript "AX=",16, AX
 	;;;
 	xor rax,rax
 	mov eax,10000000000000000000000000000000b
-	__BiTest_MonoScript 32, EAX
+	__BiTest_MonoScript "EAX=",32, EAX
 	;;;
 	xor rax,rax
 	mov rax,1000000010000000000000000000000000100000000000000000000000000000b
-	__BiTest_MonoScript 64, RAX	
+	__BiTest_MonoScript "RAX=",64, RAX
 	;;;
 }
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-macro __BiTest_Flag
-{
-;https://en.wikipedia.org/wiki/FLAGS_register
-;https://prog-cpp.ru/asm-command/
+macro __BiTest_Flag{
 push rax
+push rbx
+push rcx
+push rdx
 pushf
-pop ax
-__BiTest_AX
+;;;
+pop AX
+push AX
+	__RValue.WriteLN 'Flag=**N*ODITSZ*A*P*C'
+	__BiTest_MonoScript 'Flag=',16, AX
+;;;
+popf
+pop rdx
+pop rcx
+pop rbx
 pop rax
 }
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 macro __BiTest_Oll{
+;https://en.wikipedia.org/wiki/FLAGS_register
+;https://prog-cpp.ru/asm-command/
 push rax
 push rbx
 push rcx
 push rdx
 pushf
-	__RValue.Write 'RAX='
-	__BiTest_RAX
-	__RValue.WriteLN 'B'
+	__BiTest_MonoScript "RAX=",64, RAX
+	__BiTest_MonoScript "RBX=",64, RBX
+	MOV RAX,RCX
+	__BiTest_MonoScript "RCX=",64, RAX
+	__BiTest_MonoScript "RDX=",64, RDX
 popf
 pop rdx
 pop rcx
 pop rbx
 pop rax
-;...
-push rax
-push rbx
-push rcx
-push rdx
-pushf
-	mov rax,rbx
-	__RValue.Write 'RBX='
-	__BiTest_RAX
-	__RValue.WriteLN 'B'
-popf
-pop rdx
-pop rcx
-pop rbx
-pop rax
-;...
-push rax
-push rbx
-push rcx
-push rdx
-pushf
-	mov rax,rcx
-	__RValue.Write 'RCX='
-	__BiTest_RAX
-	__RValue.WriteLN 'B'
-popf
-pop rdx
-pop rcx
-pop rbx
-pop rax
-;...
-push rax
-push rbx
-push rcx
-push rdx
-pushf
-	mov rax,rdx
-	__RValue.Write 'RDX='
-	__BiTest_RAX
-	__RValue.WriteLN 'B'
-popf
-pop rdx
-pop rcx
-pop rbx
-pop rax
-;...
-push rax
-push rbx
-push rcx
-push rdx
-pushf
-	__RValue.WriteLN 'Flag=**N*ODITSZ*A*P*C'
-	__RValue.Write 'Flag='
-;popf
-;pushf
-	__BiTest_Flag
-	__RValue.WriteLN 'B'
-popf
-pop rdx
-pop rcx
-pop rbx
-pop rax
+;;;
+__BiTest_Flag
 }
