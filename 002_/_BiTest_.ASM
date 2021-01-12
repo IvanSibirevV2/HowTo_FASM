@@ -18,14 +18,12 @@ section '.code' code readable executable
 start:
         __setlocale_Russian
 		__SharpX 20
-		__Test.__BiTest_AL
-		__Write _N
-		__Test.__BiTest_AX
-		__Write _N
-		__Test.__BiTest_EAX
-		__Write _N
-		__Test.__BiTest_RAX
-		__Write _N
+		;__Test__BiTest_MonoScript
+		
+		__BiTest_MonoScript 64, RAX
+		__BiTest_MonoScript 64, RBX	
+		__BiTest_MonoScript 64, RCX
+		__BiTest_MonoScript 64, RDX
 		
 		__SharpX 20
 		; Это неполный пример, в котором продемонстрировано 
@@ -45,7 +43,7 @@ STD
 		MOV RBX, 100011B
 		MOV RCX, 100111B
 		MOV RDX, 101111B
-		__BiTest_Oll
+		;__BiTest_Oll
 		cinvoke system,_Pause
         jmp exit ;???????
 exit:

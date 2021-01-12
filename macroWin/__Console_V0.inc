@@ -140,144 +140,64 @@ macro __Test.CMP.Oll _JmpS
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Битовые тесты с выводом на экран           ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-macro __BiTest_AL{
+macro __BiTest_MonoScript _Count, _Param{
 	local m_y89ryd3,m_4234423,m_4723649
+	__RValue.Write `_Param#'='
 	push rax
+	push rbx
 	push rcx
+	push rdx
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 	xor rcx,rcx
-	mov cl,8
+	mov cl,_Count
 	m_y89ryd3:
 	;Циклические сдвиги выдвигают бит регистр флагов в EFLAGS.CF
 	;На EFLAGS.CF есть два перехода ;jc если единица;jnc если ноль
-	shl al,1
+	shl _Param,1
 	push rax
+	push rbx
 	push rcx
+	push rdx
 	jnc m_4234423
 		__Write _1	
 	jmp m_4723649
 		m_4234423:
 		__Write _0
 	m_4723649:
+	pop rdx
 	pop rcx
+	pop rbx
 	pop rax
 	sub cx,1
 	;Переход если результат не отрицательный
 	jnz m_y89ryd3
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	pop rdx
 	pop rcx
-	POP rax
+	pop rbx
+	pop rax
+	__RValue.WriteLN 'B'
 }
-macro __Test.__BiTest_AL{
+macro __Test__BiTest_MonoScript
+{
 	xor rax,rax
 	mov al,10000000b
-	__BiTest_AL
-}
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-macro __BiTest_AX{
-	local m_y89ryd3,m_4234423,m_4723649
-	push rax
-	push rcx
-	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-	xor rcx,rcx
-	mov cl,16
-	m_y89ryd3:
-	;Циклические сдвиги выдвигают бит регистр флагов в EFLAGS.CF
-	;На EFLAGS.CF есть два перехода ;jc если единица;jnc если ноль
-	shl ax,1
-	push rax
-	push rcx
-	jnc m_4234423
-		__Write _1	
-	jmp m_4723649
-		m_4234423:
-		__Write _0
-	m_4723649:
-	pop rcx
-	pop rax
-	sub cx,1
-	;Переход если результат не трицательный
-	jnz m_y89ryd3
-	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-	pop rcx
-	POP rax
-}
-macro __Test.__BiTest_AX{
+	__BiTest_MonoScript 8, AL
+	;;;
 	xor rax,rax
 	mov ax,1000000000000000b
-	__BiTest_AX
-	
-}
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-macro __BiTest_EAX{
-	local m_y89ryd3,m_4234423,m_4723649
-	push rax
-	push rcx
-	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-	xor rcx,rcx
-	mov cl,32
-	m_y89ryd3:
-	;Циклические сдвиги выдвигают бит регистр флагов в EFLAGS.CF
-	;На EFLAGS.CF есть два перехода ;jc если единица;jnc если ноль
-	shl eax,1
-	push rax
-	push rcx
-	jnc m_4234423
-		__Write _1	
-	jmp m_4723649
-		m_4234423:
-		__Write _0
-	m_4723649:
-	pop rcx
-	pop rax
-	sub cx,1
-	;Переход если результат не трицательный
-	jnz m_y89ryd3
-	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-	pop rcx
-	POP rax
-}
-macro __Test.__BiTest_EAX{
+	__BiTest_MonoScript 16, AX
+	;;;
 	xor rax,rax
 	mov eax,10000000000000000000000000000000b
-	__BiTest_EAX
-	
-}
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-macro __BiTest_RAX{
-	local m_y89ryd3,m_4234423,m_4723649
-	push rax
-	push rcx
-	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-	xor rcx,rcx
-	mov cl,64
-	m_y89ryd3:
-	;Циклические сдвиги выдвигают бит регистр флагов в EFLAGS.CF
-	;На EFLAGS.CF есть два перехода ;jc если единица;jnc если ноль
-	shl Rax,1
-	push rax
-	push rcx
-	jnc m_4234423
-		__Write _1	
-	jmp m_4723649
-		m_4234423:
-		__Write _0
-	m_4723649:
-	pop rcx
-	pop rax
-	sub cx,1
-	;Переход если результат не трицательный
-	jnz m_y89ryd3
-	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-	pop rcx
-	POP rax
-}
-macro __Test.__BiTest_RAX{
+	__BiTest_MonoScript 32, EAX
+	;;;
 	xor rax,rax
 	mov rax,1000000010000000000000000000000000100000000000000000000000000000b
-	__BiTest_RAX
+	__BiTest_MonoScript 64, RAX	
+	;;;
 }
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 macro __BiTest_Flag
 {
 ;https://en.wikipedia.org/wiki/FLAGS_register
