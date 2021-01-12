@@ -43,7 +43,9 @@ push rax
 push rbx
 push rcx
 push rdx
+pushf
 	cinvoke printf,_Char
+popf
 pop rdx
 pop rcx
 pop rbx
@@ -160,7 +162,7 @@ macro __BiTest_AL{
 	pop rcx
 	pop rax
 	sub cx,1
-	;Переход если результат не трицательный
+	;Переход если результат не отрицательный
 	jnz m_y89ryd3
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 	pop rcx
@@ -354,10 +356,11 @@ push rdx
 pushf
 	__RValue.WriteLN 'Flag=**N*ODITSZ*A*P*C'
 	__RValue.Write 'Flag='
-popf
-pushf
+;popf
+;pushf
 	__BiTest_Flag
 	__RValue.WriteLN 'B'
+popf
 pop rdx
 pop rcx
 pop rbx
