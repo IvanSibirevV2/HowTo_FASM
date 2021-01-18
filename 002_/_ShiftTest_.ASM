@@ -12,118 +12,100 @@ __InitConsoleSectionData
 	a dd 0
 	b dd 0
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;	
-macro __Test.ROR_ROL
-{
-	;;;;;;;;;;;;;;;;
-	XOR RAX,RAX
-	MOV RAX, 110101B
-	__RValue.Write 'AX='
-	__BiTest_AX
-	__RValue.WriteLN 'B'
-	;;;;;;;;;;;;;;;;
-	__RValue.WriteLN "ROR AX,1"
-	ROR AX,1
-	__RValue.Write 'AX='
-	__BiTest_AX
-	__RValue.WriteLN 'B'
-	;;;;;;;;;;;;;;;;
-	__RValue.WriteLN "ROR AX,2"
-	ROR AX,2
-	__RValue.Write 'AX='
-	__BiTest_AX
-	__RValue.WriteLN 'B'
-	;;;;;;;;;;;;;;;;
-	__RValue.WriteLN "ROL AX,1"
-	ROL AX,1
-	__RValue.Write 'AX='
-	__BiTest_AX
-	__RValue.WriteLN 'B'
-	;;;;;;;;;;;;;;;;
-	__RValue.WriteLN "ROL AX,2"
-	ROL AX,2
-	__RValue.Write 'AX='
-	__BiTest_AX
-	__RValue.WriteLN 'B'
-}
-macro __Test.SHR_SHL
-{
-	;;;;;;;;;;;;;;;;
-	XOR RAX,RAX
-	MOV RAX, 110101B
-	__RValue.Write 'AX='
-	__BiTest_AX
-	__RValue.WriteLN 'B'
-	;;;;;;;;;;;;;;;;
-	__RValue.WriteLN "SHR AX,1"
-	SHR AX,1
-	__RValue.Write 'AX='
-	__BiTest_AX
-	__RValue.WriteLN 'B'
-	;;;;;;;;;;;;;;;;
-	__RValue.WriteLN "SHR AX,2"
-	SHR AX,2
-	__RValue.Write 'AX='
-	__BiTest_AX
-	__RValue.WriteLN 'B'
-	;;;;;;;;;;;;;;;;
-	__RValue.WriteLN "SHL AX,1"
-	SHL AX,1
-	__RValue.Write 'AX='
-	__BiTest_AX
-	__RValue.WriteLN 'B'
-	;;;;;;;;;;;;;;;;
-	__RValue.WriteLN "SHL AX,2"
-	SHL AX,2
-	__RValue.Write 'AX='
-	__BiTest_AX
-	__RValue.WriteLN 'B'
-}
-	
+
 section '.code' code readable executable
 start:
         __setlocale_Russian
 		__SharpX 20
 		;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-		xor eax,eax
-		mov ax, 1000000000000000b
-		__BiTest_Oll
-		; ;;;
-		; __RValue.Write 'AX='
-		; __BiTest_AX
-		; __RValue.WriteLN 'B'
-		; ;;;
-		; push rax
-		; __RValue.WriteLN 'Flag=**N*ODITSZ*A*P*C'
-		; __RValue.Write 'Flag='
-		; __BiTest_Flag
-		; __RValue.WriteLN 'B'
-		; pop rax
-		; __RValue.Write 'AX='
-		; __BiTest_AX
-		; __RValue.WriteLN 'B'
+		macro __Test.Shift_RAX _Shift,_StartValue
+		{
+			__RValue.WriteLN '__Test.Shift_RAX '#`_Shift#','#`_StartValue
+			XOR RAX,RAX
+			MOV RAX, _StartValue;110101B
+			__BiTest_MonoScript "RAX=",64, RAX
+			_Shift RAX,1
+			__BiTest_MonoScript "RAX=",64, RAX
+			_Shift RAX,2
+			__BiTest_MonoScript "RAX=",64, RAX
+			__SharpX 20
+		}
+		;__Test.Shift_RAX ROR,1000000011111110000000111111000000111110000011110000111000110010b
+		;__Test.Shift_RAX ROL,1000000011111110000000111111000000111110000011110000111000110010b
+		;__Test.Shift_RAX SHR,1000000011111110000000111111000000111110000011110000111000110010b
+		;__Test.Shift_RAX SHL,1000000011111110000000111111000000111110000011110000111000110010b
 		;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-		;bt  ax,15 ; тестирует бит в регистре
-		__BiTest_Oll
-		
-		; ;;;
-		; __RValue.Write 'AX='
-		; __BiTest_AX
-		; __RValue.WriteLN 'B'
-		; ;;;
-		; __RValue.WriteLN 'Flag=**N*ODITSZ*A*P*C'
-		; __RValue.Write 'Flag='
-		; __BiTest_Flag
-		; __RValue.WriteLN 'B'
+		macro __Test.Shift_EAX _Shift,_StartValue
+		{
+			__RValue.WriteLN '__Test.Shift_EAX '#`_Shift#','#`_StartValue
+			XOR RAX,RAX
+			MOV RAX, _StartValue;110101B
+			__BiTest_MonoScript "RAX=",64, RAX
+			_Shift EAX,1
+			__BiTest_MonoScript "RAX=",64, RAX
+			_Shift EAX,2
+			__BiTest_MonoScript "RAX=",64, RAX
+			__SharpX 20
+		}
+		;__Test.Shift_EAX ROR,1000000011111110000000111111000000111110000011110000111000110010b
+		;__Test.Shift_EAX ROL,1000000011111110000000111111000000111110000011110000111000110010b
+		;__Test.Shift_EAX SHR,1000000011111110000000111111000000111110000011110000111000110010b
+		;__Test.Shift_EAX SHL,1000000011111110000000111111000000111110000011110000111000110010b
 		;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-		
-		
-		
-		;__Test.ROR_ROL
-		;__Test.SHR_SHL
-		;__BiTest_Oll
-		
-		;bt  ax,15 ; тестирует бит в регистре
-		;__BiTest_Oll
+		macro __Test.Shift_AX _Shift,_StartValue
+		{
+			__RValue.WriteLN '__Test.Shift_AX '#`_Shift#','#`_StartValue
+			XOR RAX,RAX
+			MOV RAX, _StartValue;110101B
+			__BiTest_MonoScript "RAX=",64, RAX
+			_Shift AX,1
+			__BiTest_MonoScript "RAX=",64, RAX
+			_Shift AX,2
+			__BiTest_MonoScript "RAX=",64, RAX
+			__SharpX 20
+		}
+		;__Test.Shift_AX ROR,1000000011111110000000111111000000111110000011110000111000110010b
+		;__Test.Shift_AX ROL,1000000011111110000000111111000000111110000011110000111000110010b
+		;__Test.Shift_AX SHR,1000000011111110000000111111000000111110000011110000111000110010b
+		;__Test.Shift_AX SHL,1000000011111110000000111111000000111110000011110000111000110010b
+		;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+		macro __Test.Shift_AL _Shift,_StartValue
+		{
+			__RValue.WriteLN '__Test.Shift_AL '#`_Shift#','#`_StartValue
+			XOR RAX,RAX
+			MOV RAX, _StartValue;110101B
+			__BiTest_MonoScript "RAX=",64, RAX
+			_Shift AL,1
+			__BiTest_MonoScript "RAX=",64, RAX
+			_Shift AL,2
+			__BiTest_MonoScript "RAX=",64, RAX
+			__SharpX 20
+		}
+		;__Test.Shift_AL ROR,1000000011111110000000111111000000111110000011110000111000110010b
+		;__Test.Shift_AL ROL,1000000011111110000000111111000000111110000011110000111000110010b
+		;__Test.Shift_AL SHR,1000000011111110000000111111000000111110000011110000111000110010b
+		;__Test.Shift_AL SHL,1000000011111110000000111111000000111110000011110000111000110010b
+		;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+		;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+		macro __Test.Shift_AH _Shift,_StartValue
+		{
+			__RValue.WriteLN '__Test.Shift_AH '#`_Shift#','#`_StartValue
+			XOR RAX,RAX
+			MOV RAX, _StartValue;110101B
+			__BiTest_MonoScript "RAX=",64, RAX
+			_Shift AH,1
+			__BiTest_MonoScript "RAX=",64, RAX
+			_Shift AH,2
+			__BiTest_MonoScript "RAX=",64, RAX
+			__SharpX 20
+		}
+		;__Test.Shift_AH ROR,1000000011111110000000111111000000111110000011110000111000110010b
+		;__Test.Shift_AH ROL,1000000011111110000000111111000000111110000011110000111000110010b
+		;__Test.Shift_AH SHR,1000000011111110000000111111000000111110000011110000111000110010b
+		;__Test.Shift_AH SHL,1000000011111110000000111111000000111110000011110000111000110010b
+		;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+		;XOR RAX,RAX
+		;MOV AX, 11111111B
 		__SharpX 20
 		
 		cinvoke system,_Pause

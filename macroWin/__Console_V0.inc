@@ -144,7 +144,7 @@ macro __BiTest_MonoScript _TXT,_Count, _Param{
 	xor rcx,rcx
 	mov cl,_Count
 	m_y89ryd3:
-	;Циклические сдвиги выдвигают бит регистр флагов в EFLAGS.CF
+	;Циклические сдвиги выдвигают бит регистр флагов в EFLAGS.CF 
 	;На EFLAGS.CF есть два перехода ;jc если единица;jnc если ноль
 	shl _Param,1
 	push rax
