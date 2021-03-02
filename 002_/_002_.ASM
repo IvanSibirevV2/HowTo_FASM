@@ -2,10 +2,8 @@ format PE64 console
 entry start
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-include 'C:\D\Git_Hub\HowTo_FASM\Fasm\INCLUDE\win64a.inc'
-
+include '..\Fasm\INCLUDE\win64a.inc'
 include '..\macroWin\__Console_V0.inc'
-
 section '.idata' import data readable
 __InitConsoleSectionImport
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
