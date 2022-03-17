@@ -1,7 +1,5 @@
 @echo off
-echo %cd%
-cd C:\D\Git_Hub\HowTo_FASM\002_
-echo %cd%
+cd %~dp0
 set FileName=_BiTest_
 
 C:\D\Git_Hub\HowTo_FASM\Fasm\FASM.EXE %FileName%.ASM
